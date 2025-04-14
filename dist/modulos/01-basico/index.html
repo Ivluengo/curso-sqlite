@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Reveal JS presentation</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML" />
+    <meta name="author" content="Hakim El Hattab" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css" />
+    <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- highlight Theme -->
+
+    <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai-sublime.min.css" />
+
+    <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css" />
+
+    <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css" />
+
+    <!-- Revealjs Theme -->
+
+    <link rel="stylesheet" href="libs/reveal.js/4.3.1/theme/robot-lung.css" id="theme" />
+
+    <link rel="stylesheet" href="libs/styles/tasklist.css" />
+    <link rel="stylesheet" href="libs/styles/iota.css" />
+    <link rel="stylesheet" href="libs/styles/layout.css" />
+
+    <!-- Revealjs Theme -->
+
+    <link rel="stylesheet" href="custom-ivan.css" />
+
+    <!-- css list -->
+  </head>
+
+  <body>
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1 class="font-xxxl">SQL con SQLite</h1>
+        </section>
+
+        <section>
+          <h2 class="font-xl">Conceptos básicos de bases de datos</h2>
+        </section>
+
+        <section>
+          <h3 class="font-lg">¿Qué es una base de datos?</h3>
+          <p>
+            Una base de datos es un conjunto de datos que se almacenan y organizan de forma estructurada para que sean
+            fácilmente accesibles y gestionables.
+          </p>
+          <p><img src="./escuela/imagenes//cliente-servidor-bbdd.svg" alt="cliente-servidor-bbdd.svg" /></p>
+        </section>
+
+        <section>
+          <h3 class="font-lg">Tipos de Bases de Datos</h3>
+          <ol>
+            <li><strong>SQL</strong> (Structured Query Language) o Relacionales</li>
+            <li><strong>NoSQL</strong> o No relacionales</li>
+          </ol>
+        </section>
+
+        <section>
+          <p class="font-lg">👉 <strong>SQL (Structured Query Language) o Relacionales</strong></p>
+          <ul>
+            <li>Son las bases de datos estándar, <strong>las de toda la vida</strong>.</li>
+            <li>Sirven sobre todo para cuando tenemos datos que <strong>se relacionan entre tablas</strong>.</li>
+            <li>Cuando todos los registros vayan a tener los <strong>mismos tipos de datos</strong>.</li>
+            <li>Cuando necesitemos <strong>relaciones</strong> entre unas tablas y otras.</li>
+            <li>La estructura es mucho más <strong>rígida</strong>.</li>
+          </ul>
+        </section>
+
+        <section>
+          <p class="font-lg">👉 <strong>NoSQL o No relacionales</strong></p>
+          <ul>
+            <li>Están diseñadas para hacer peticiones <strong>más rápidas</strong>.</li>
+            <li>Tienen <strong>menos restricciones</strong>.</li>
+            <li>
+              Cuando simplemente necesitemos guardar datos
+              <strong>sin necesidad de relacionar entre unos datos y otros</strong>.
+            </li>
+            <li>Son más escalables y se adaptan mejor a <strong>datos no estructurados</strong>.</li>
+            <li>Unos registros y otros pueden tener <strong>distintos datos guardados</strong>.</li>
+            <li>Big Data</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="font-lg">Modelos de datos</h3>
+          <div class="slide" style="text-align: left; padding: 0 2.5rem">
+            <p>
+              👉 <strong>Tabla →</strong> La que contiene toda la información de cada elemento, todos los registros.
+              <br />
+              ➡ <em>tareas</em>
+            </p>
+            <p>
+              👉 <strong>Registros →</strong> Es una colección de datos referentes a un tema. (Cada renglón o fila de la
+              tabla) <br />
+              ➡ | 1 | Pasear a las perras | Completado |
+            </p>
+            <p>
+              👉 <strong>Campos/Columnas →</strong> Es la unidad básica de información (cada columna). <br />
+              ➡ <em>INTEGER, TEXT, REAL, BLOB, NULL</em>
+            </p>
+            <p>
+              👉 <strong>Dato →</strong> Es el valor de cada una de las celdas, la información que nos interesa guardar.
+              <br />
+              ➡ <em>“Pasear a las perras”</em>
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h4 class="font-lg">Tipos de datos</h4>
+          <h5 class="font-sm">Lo que podemos guardar en cualquier campo de una tabla.</h5>
+          <table>
+            <thead>
+              <tr>
+                <th>TIPO</th>
+                <th>DESCRIPCIÓN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>TEXT</strong></td>
+                <td>Cualquier tipo de texto.</td>
+              </tr>
+              <tr>
+                <td><strong>INTEGER</strong></td>
+                <td>Números enteros sin coma.</td>
+              </tr>
+              <tr>
+                <td><strong>REAL</strong></td>
+                <td>Números decimales.</td>
+              </tr>
+              <tr>
+                <td><strong>NULL</strong></td>
+                <td>El valor <em>null</em>, es decir, nada</td>
+              </tr>
+              <tr>
+                <td><strong>BLOB</strong></td>
+                <td>Datos binarios, es decir archivos como fotos</td>
+              </tr>
+              <tr>
+                <td><strong>NUMERIC</strong></td>
+                <td>
+                  Acepta tanto enteros como decimales pero deja a SQLite que establezca el tipo
+                  <span class="rosa">¡ojo con este!</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h4 class="font-lg">Tipos de datos</h4>
+          <h5 class="font-sm">¿Puedo usar otros tipos?</h5>
+          <p>
+            Sí, podemos usar otros tipos de datos, pero SQLite los convierte a su tipo real. Por ejemplo, si declaramos
+            un campo como <code>VARCHAR(255)</code> lo convertirá a <code>TEXT</code>.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo declarado</th>
+                <th>Afinidad real</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>VARCHAR(255)</td>
+                <td>TEXT</td>
+              </tr>
+              <tr>
+                <td>DECIMAL</td>
+                <td>NUMERIC</td>
+              </tr>
+              <tr>
+                <td>BOOLEAN</td>
+                <td>NUMERIC</td>
+              </tr>
+              <tr>
+                <td>DATETIME</td>
+                <td>NUMERIC</td>
+              </tr>
+              <tr>
+                <td>FLOAT</td>
+                <td>REAL</td>
+              </tr>
+              <tr>
+                <td>INT</td>
+                <td>INTEGER</td>
+              </tr>
+              <tr>
+                <td>TINYINT</td>
+                <td>INTEGER</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h3 class="font-lg">¿Cómo trabajamos con las bases de datos de SQLite?</h3>
+          <div class="left">
+            <p>
+              A diferencia de otras bases de datos, SQLite <strong>no tiene un servidor al que conectarse</strong>. En
+              su lugar, se trabaja directamente con <strong>un archivo</strong> de base de datos. Este archivo puede
+              estar en el disco duro o guardado en la nube.
+            </p>
+          </div>
+          <p>➡ <em>tareas.db</em></p>
+        </section>
+
+        <section>
+          <h3 class="font-lg">¿Cómo vemos nuestras bases de datos?</h3>
+          <p>
+            Podemos ver nuestras bases de datos usando varios programas, pero el más sencillo es
+            <strong>DB Browser for SQLite</strong>. Este programa nos permite ver y editar nuestras bases de datos de
+            forma sencilla y visual.
+          </p>
+          <p>También podemos usar VSCode con alguna extensión. Una muy buena es <strong>DBCode</strong>.</p>
+        </section>
+
+        <section>
+          <h2 class="font-xl">Antes que nada, hay que diseñar nuestra base de datos</h2>
+          <p>
+            Lo primero y más importante es entender
+            <strong>cómo se va a organizar cada una de nuestras bases de datos</strong>. Para ello solemos hacer una
+            serie de pasos en los que veremos todas las necesidades que tendrá nuestra base de datos.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="font-lg">1. MODELO CONCEPTUAL - Entender los requerimientos</h3>
+        </section>
+
+        <section>
+          <h4><strong>Modelo de negocio</strong></h4>
+          <div class="left">
+            <p>
+              Lo primero que hay que hacer es <strong>organizar</strong> bien nuestro
+              <strong>modelo de negocio</strong>, es decir, <strong>cómo funciona nuestra empresa</strong> y qué
+              <strong>tipos de datos</strong> vamos a querer guardar y de qué forma.
+            </p>
+            <p><strong>Aquí podemos hacer algún mapa conceptual de lo que pueda contener la BBDD.</strong></p>
+          </div>
+          <p>
+            <img src="./escuela/imagenes/01-modelo-conceptual-escuela.svg" alt="01-modelo-conceptual-escuela.svg" />
+          </p>
+        </section>
+
+        <section>
+          <p>
+            <strong>Lo pasamos a excel para ver cómo se verían nuestros datos una vez añadidos los registros.</strong>
+          </p>
+          <p><img src="./escuela/imagenes/02-modelo-excel.png" alt="02-modelo-excel.png" /></p>
+        </section>
+
+        <section>
+          <h3 class="font-lg">2. MODELO LÓGICO:</h3>
+          <ul>
+            <li>
+              Ahora hay que sacar del modelo conceptual toda la informaciñon que vamos a necesitar para crear nuestra
+              base de datos.
+              <ul>
+                <li>Entidades/Tablas</li>
+                <li>Atributos/Columnas</li>
+                <li>Llaves/Primary Key, Foreign Key, Unique</li>
+                <li>Relaciones entre tablas</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h4 class="font-xl">ENTIDAD / tabla</h4>
+          <p>
+            Se considera entidad a cualquier elemento de nuestro modelo de negocio 👉 nombre, persona, lugar, cosa,
+            evento, etc.
+          </p>
+          <p><strong>Cada entidad</strong> se convertirá en <strong>una tabla</strong> dentro de nuestra BBDD.</p>
+        </section>
+
+        <section>
+          <h4 class="font-xl">ATRIBUTOS / Columnas</h4>
+          <p>Cada uno de los datos que tiene una entidad.</p>
+          <p><em>Ej: nombre, email, fecha_compra, telefono, edad, esta_activo, etc.</em></p>
+        </section>
+
+        <section>
+          <h4 class="font-xl">LLAVES</h4>
+          <p>Son identificadores únicos para cada columna. Nos ayudarán a relacionar las tablas entre sí.</p>
+          <ol>
+            <li><strong>Primary Key →</strong> Identificador único que tiene cada registro.</li>
+            <li><strong>Foreign Key →</strong> Son las que van a permitir la relación entre una tabla y otra.</li>
+            <li>
+              <strong>Unique →</strong> No sería una llave al uso, pero sí que es un tipo de dato que va a ser único en
+              toda su tabla.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4 class="font-xl">RELACIONES</h4>
+          <p>Son ese tipo de asociación que hay entre las tablas.</p>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.</td>
+                <td><strong>1 a 1 (1 to 1) 👉</strong></td>
+                <td>empleado ↔ DNI</td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td><strong>1 a Muchos (1 to N) 👉</strong></td>
+                <td>pais ⇉ ciudad</td>
+              </tr>
+              <tr>
+                <td>3.</td>
+                <td><strong>Muchos a Muchos (N to M) 👉</strong></td>
+                <td>alumno ⇇⇉ curso</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p class="font-lg"><strong>Por último:</strong></p>
+          <p>
+            Al saber las relaciones que hay entre las tablas, podemos empezar a darnos cuenta de que va a haber
+            distintos tipos de tablas. TYo lo divido en <strong>3 tipos de tablas:</strong>
+          </p>
+        </section>
+
+        <section>
+          <h5 class="font-lg">1. <strong>Tabla de datos:</strong></h5>
+          <p>La que guardará todos los datos que nos interesan.</p>
+          <p>
+            <em>Una tabla <strong>profesor</strong> tendrá una tabla y guardará su:</em>
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>nombre</th>
+                <th>apellidos</th>
+                <th>email</th>
+                <th>etc.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ivan</td>
+                <td>Luengo</td>
+                <td><a href="mailto:ivluengo@gmail.com">ivluengo@gmail.com</a></td>
+                <td>–</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h5 class="font-lg">2. <strong>Tabla de catálogo:</strong></h5>
+          <p>
+            Guardará un listado de “tipos” y tendrá un número determinado de datos que usualmente no varía en el tiempo.
+            Esta entidad la relacionaremos con una tabla de datos.
+          </p>
+          <p>
+            <em
+              >Es la típica tabla “métodos de pago” o “tipo de usuario” en la que guardaremos los 3 o 4 tipos que
+              hay.</em
+            >
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>metodo_de_pago</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>tarjeta</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>transferencia</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>efectivo</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h5 class="font-lg">3. <strong>Tabla de tipo enlace/pivote:</strong></h5>
+          <p>Es una entidad que nos sirve para relacionar unas tablas con otras.</p>
+          <p><em>Una tabla que guarde la relación entre los cursos a los que se ha matriculado cada alumno</em></p>
+          <table>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>alumno_id</th>
+                <th>curso_id</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>5</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>3</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>2</td>
+                <td>4</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p>
+            <strong
+              >Nos hemos dado cuenta de que la relación curso &gt; alumnos, al ser <code>N to N</code> requería una
+              entidad intermedia llamada matrícula.</strong
+            >
+          </p>
+          <p><img src="./escuela/imagenes/03-modelo-logico-escuela.svg" alt="03-modelo-logico-escuela.svg" /></p>
+          <p>👍</p>
+        </section>
+
+        <section>
+          <h2 class="font-xl">FOREIGN KEY CONSTRAINTS</h2>
+          <p>
+            Siempre que tengamos una <strong>llave foránea</strong> deberíamos añadirle unas restricciones para definir
+            qué hacer cuando se <span class="lila">ACTUALICE</span> un dato o cuando se
+            <span class="rosa">BORRE</span> un dato de la tabla relacionada.
+          </p>
+        </section>
+
+        <section>
+          <h3>Atributos para la Foreign Key:</h3>
+          <ul>
+            <li>
+              <strong>RESTRICT</strong> <span class="emoticono">👉</span> Si intentamos borrar un profesor de la BBDD,
+              <span class="rosa">no nos va a dejar</span> porque sabe que ese profesor está relacionado con un curso.
+            </li>
+            <li>
+              <strong>CASCADE</strong> <span class="emoticono">👉</span> Si hay alguna modificación o borrado de un
+              profe, también se va a actualizar el registro del curso o a borrar.
+            </li>
+            <li>
+              <strong>SET NULL</strong> <span class="emoticono">👉</span> Si hay algún cambio, se cambiará el valor del
+              campo <code>profesor_id</code> a <span class="azul">null</span> dentro de la tabla <code>cursos</code>.
+            </li>
+            <li>
+              <strong>SET DEFAULT</strong> <span class="emoticono">👉</span> Si hay algún cambio, se cambiará el valor
+              del campo <code>profesor_id</code> a un valor por defecto dentro de la tabla <code>cursos</code>.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="font-lg">3. MODELO FÍSICO</h3>
+          <p>
+            Una vez terminado, podemos crear nuestro <strong>modelo final</strong>. Que será distinto dependiendo de qué
+            tipo de base de datos usemos.
+          </p>
+        </section>
+
+        <section>
+          <!-- En este ejemplo, una cosa que podríamos hacer en la tabla `matriculas` es generar **DOS PRIMARY KEY**, para el campo `curso_id` y para el campo `alumno_id`. Esta **CLAVE PRIMARIA COMPUESTA** nos ayuda a crear un identificador único que combine dos columnas únicas. Esto nos ayuda a que nunca un alumno pueda matricularse 2 veces en el mismo curso, porque se repetiría esa combinación. Si no queremos eso, o si en un futuro esa tabla se va a relacionar con otra, simplemente hacemos una columna `matricula_id`.  -->
+          <h2 class="font-xxxl">Normalización</h2>
+        </section>
+
+        <section>
+          <p class="font-lg">
+            La normalización son una serie de normas que hacen que nuestras bases de datos estén mucho mejor
+            estructuradas y con muchos menos datos redundantes.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="font-md">
+            1. PRIMERA FORMA NORMAL <span class="emoticono">👉</span> Cada celda debería tener un solo valor indivisible
+            y no deberíamos tener columnas repetidas.
+          </h3>
+          <p class="m-auto w-75">
+            <img src="./escuela/imagenes/04-modelo-fisico-escuela.svg" alt="04-modelo-fisico-escuela.svg" />
+          </p>
+        </section>
+
+        <section>
+          <p>
+            Por ejemplo, si quisiéramos crear una columna dentro de la tabla <code>cursos</code> que se llamara
+            <code>categorias</code>, sería un error, primero porque habría varias categorías separadas por coma y eso es
+            difícil de trabajar.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>nombre</th>
+                <th>horas</th>
+                <th>categorias</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>SQL</td>
+                <td>20</td>
+                <td>SQL, Python, Java</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Python</td>
+                <td>30</td>
+                <td>Python, SQL</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Java</td>
+                <td>40</td>
+                <td>Java, SQL</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>❌❌❌</p>
+        </section>
+
+        <section>
+          <p>
+            Si, en cambio, quisieramos crear 2 o 3 columnas llamadas <code>categoria_1</code>, <code>categoría_2</code>,
+            etc. habría columnas repetidas.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>nombre</th>
+                <th>horas</th>
+                <th>categoria_1</th>
+                <th>categoria_2</th>
+                <th>categoria_3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>SQL</td>
+                <td>20</td>
+                <td>SQL</td>
+                <td>Python</td>
+                <td>Java</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Python</td>
+                <td>30</td>
+                <td>Python</td>
+                <td>SQL</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Java</td>
+                <td>40</td>
+                <td>Java</td>
+                <td>SQL</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p class="font-sm">
+            En este caso lo mejor es crear una <strong>tabla de tipo catálogo</strong> llamada <code>categorias</code>.
+          </p>
+          <p class="m-auto w-50">
+            <img
+              src="./escuela/imagenes/recortados/05-modelo-fisico-categorias-escuela.svg"
+              alt="05-modelo-fisico-categorias-escuela.svg"
+            />
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>categoria</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>SQL</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Python</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Java</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>JavaScript</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p>
+            El caso es que esta tabla tiene una relación <strong>“Muchos a Muchos”</strong> con la tabla
+            <code>cursos</code> y eso no existe en SQL. En realidad, siempre que pasa esto creamos otra
+            <span class="rosa"><strong>tabla de enlace</strong></span> como la de <code>matriculas</code>.
+          </p>
+          <p class="w-60 m-auto">
+            <img
+              src="./escuela/imagenes/recortados/06-modelo-fisico-categorias-cursos-escuela.svg"
+              alt="06-modelo-fisico-categorias-cursos-escuela.svg"
+            />
+          </p>
+        </section>
+
+        <section>
+          <p>
+            Además, también deberíamos separar aquellos campos que puedan ser divididios, como <code>nombre</code> en
+            <span class="azul">“nombre”</span>, <span class="azul">“apellido”</span> o <code>dirección</code> en
+            <span class="azul">“calle”</span>, <span class="azul">“numero</span>”, y
+            <span class="azul">“codigo_postal”</span>.
+          </p>
+          <p class="w-60 m-auto">
+            <img
+              src="./escuela/imagenes/06-modelo-fisico-categorias-cursos-escuela.svg"
+              alt="06-modelo-fisico-categorias-cursos-escuela.svg"
+            />
+          </p>
+        </section>
+
+        <section>
+          <h3>
+            2. SEGUNDA FORMA NORMAL <span class="emoticono">👉</span> Ninguna tabla debería tener celdas que no hablaran
+            de “esa” y “solo esa” entidad.
+          </h3>
+          <p>
+            En este caso, si tuviéramos un campo en la tabla <code>cursos</code> que se llamara <code>profesor</code>,
+            acabaríamos teniendo a lo mejor varios registros con el mismo nombre del profesor porque imparte varios
+            cursos.
+          </p>
+          <p>
+            Lo suyo sería <strong>sacarlo a otra tabla y relacionarla con esta.</strong> Esto lo veremos siempre cuando
+            veamos <strong>CAMPOS REPETIDOS.</strong>
+          </p>
+        </section>
+
+        <section>
+          <table>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>nombre</th>
+                <th>horas</th>
+                <th>profesor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>SQL</td>
+                <td>20</td>
+                <td>Ivan</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Python</td>
+                <td>30</td>
+                <td>Ivan</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Java</td>
+                <td>40</td>
+                <td>Pablo</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>JavaScript</td>
+                <td>50</td>
+                <td>Ivan</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>❌❌❌</p>
+        </section>
+
+        <section>
+          <div style="display: flex; gap: 1rem; align-items: center" class="">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="4">Cursos</th>
+                </tr>
+                <tr>
+                  <th>id</th>
+                  <th>nombre</th>
+                  <th style="text-align: center">horas</th>
+                  <th style="text-align: center">profesor_id</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>SQL</td>
+                  <td style="text-align: center">20</td>
+                  <td style="text-align: center">2</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Python</td>
+                  <td style="text-align: center">30</td>
+                  <td style="text-align: center">2</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Java</td>
+                  <td style="text-align: center">40</td>
+                  <td style="text-align: center">13</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>JavaScript</td>
+                  <td style="text-align: center">50</td>
+                  <td style="text-align: center">2</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>↔</p>
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: center" colspan="2">Profesores</th>
+                </tr>
+                <tr>
+                  <th style="text-align: center">id</th>
+                  <th style="text-align: center">nombre</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: center">2</td>
+                  <td style="text-align: center">Ivan</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">13</td>
+                  <td style="text-align: center">Pablo</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>✅✅✅</p>
+        </section>
+
+        <section>
+          <p>
+            <img
+              src="./escuela/imagenes/recortados/07-modelo-fisico-profesores-escuela.svg"
+              alt="07-modelo-fisico-profesores-escuela.svg"
+            />
+          </p>
+        </section>
+
+        <section>
+          <h3>
+            3. TERCERA FORMA NORMAL <span class="emoticono">👉</span> Ninguna columna en una tabla debería ser derivada
+            de otras columnas.
+          </h3>
+          <p>
+            Por ejemplo, si tenemos una columna <code>nombre</code> y otra columna <code>apellido</code>, no deberíamos
+            tener otra columna llamada <code>nombre_completo</code> porque esa información ya la podemos sacar de las
+            otras dos.
+          </p>
+          <p>Este ejemplo también lo vemos cuando tenemos columnas que son cálculos matemáticos de otras columnas.</p>
+        </section>
+
+        <section>
+          <h3 class="font-xl">EN RESUMEN</h3>
+          <h4>Intenta no tener código repetido ni datos que no formen parte de una tabla.</h4>
+        </section>
+
+        <section>
+          <h3 class="font-xl">Como consejo final</h3>
+          <h4 class="font-lg">INTENTA NO HACER TABLAS DE ABSOLUTAMENTE TODO</h4>
+          <p>(solo lo que haga falta para tu modelo de negocio)</p>
+        </section>
+
+        <section>
+          <h2 class="font-lg">Ejercicio ejemplo 01</h2>
+          <div class="font-sm">
+            <p>
+              Se quiere diseñar una Base de Datos para controlar el acceso a las pistas deportivas de Zaragoza. Se
+              tendrán en cuenta los siguientes supuestos:
+            </p>
+            <ul>
+              <li>
+                Todo aquel que quiera hacer uso de las instalaciones tendrá que registrarse y proporcionar su nombre,
+                apellidos, email, teléfono, dni y fecha de nacimiento.
+              </li>
+              <li>Hay varios polideportivos en la ciudad, identificados por nombre, dirección, extensión (en m2).</li>
+              <li>
+                En cada polideportivo hay varias pistas de diferentes deportes. De cada pista guardaremos un código que
+                la identifica, el tipo de pista (tenis, fútbol, pádel, etc.), si está operativa o en mantenimiento, el
+                precio y la última vez que se reservó.
+              </li>
+              <li>
+                Cada vez que un usuario registrado quiera utilizar una pista tendrá que realizar una reserva previa a
+                través de la web que el ayuntamiento ha creado. De cada reserva queremos registrar la fecha en la que se
+                reserva la pista, la fecha en la que se usará y el precio. Hay que tener en cuenta que todos los
+                jugadores que vayan a hacer uso de la pista deberán estar registrados en el sistema y serán vinculados
+                con la reserva.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h1 class="invisible" aria-hidden="true">THE END</h1>
+          <p class="font-xxxl">🔚</p>
+        </section>
+      </div>
+    </div>
+
+    <div class="line top"></div>
+    <div class="line bottom"></div>
+    <div class="line left"></div>
+    <div class="line right"></div>
+
+    <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+    <script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+
+    <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+    <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+    <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+    <script>
+      const printPlugins = [
+        RevealNotes,
+        RevealHighlight,
+        RevealMath.MathJax3,
+        RevealAnimate,
+
+        RevealEmbedTweet,
+        RevealChart
+      ];
+
+      const plugins = [
+        ...printPlugins,
+        RevealZoom,
+        RevealSearch,
+        RevealMarkdown,
+        RevealMenu,
+        RevealFullscreen,
+        RevealAnything,
+        //RevealAudioSlideshow,
+        //RevealAudioRecorder,
+        RevealCustomControls,
+        // poll
+        // question
+        // seminar
+        Verticator
+      ];
+
+      // Also available as an ES module, see:
+      // https://revealjs.com/initialization/
+      Reveal.initialize({
+        controls: true,
+        controlsTutorial: true,
+        controlsLayout: 'bottom-right',
+        controlsBackArrows: 'faded',
+        progress: true,
+        slideNumber: false,
+        //#showSlideNumber "all" "print" "speaker"
+        hash: true, //# hash: false,
+        //# respondToHashChanges: true,
+        //# history: false,
+        keyboard: true,
+        //#keyboardCondition: null,
+        overview: true,
+        center: true,
+        touch: true,
+        loop: false,
+        rtl: false,
+        //#navigationMode: 'default', linear grid
+        shuffle: false,
+        fragments: true,
+        fragmentInURL: false,
+        embedded: false,
+        help: true,
+        //#pause: true
+        showNotes: false,
+        autoPlayMedia: false, // TODO fix this to a nullable value
+        //#preloadIframes: null. true false
+        //#autoAnimate: true
+        //#autoAnimateMatcher: null,
+        //#autoAnimateEasing: 'ease',
+        //autoAnimateDuration: 1.0,
+        //#autoAnimateUnmatched: true
+        //#autoAnimateStyles: []
+        autoSlide: 0, // TODO fix this to a falseable value
+        autoSlideStoppable: true,
+        autoSlideMethod: '0',
+        defaultTiming: 120,
+        mouseWheel: false,
+        //#previewLinks: false
+        //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+        //#postMessageEvents: false,
+        //#focusBodyOnPageVisibilityChange: true,
+        transition: 'slide',
+        transitionSpeed: 'fast',
+        backgroundTransition: 'fade',
+        //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+        //#pdfSeparateFragments: true,
+        //#pdfPageHeightOffset: -1,
+        viewDistance: 3,
+        //#mobileViewDistance: 2,
+        display: 'block',
+        //#hideInactiveCursor: true,
+        //#hideCursorTime: 5000
+
+        // Parallax Background
+        parallaxBackgroundImage: '',
+        parallaxBackgroundSize: '',
+        parallaxBackgroundHorizontal: 0,
+        parallaxBackgroundVertical: 0,
+
+        //Presentation Size
+        width: 960,
+        height: 700,
+        margin: 0.04,
+        minScale: 0.2,
+        maxScale: 2,
+        disableLayout: false,
+
+        audio: {
+          prefix: 'audio/', // audio files are stored in the "audio" folder
+          suffix: '.ogg', // audio files have the ".ogg" ending
+          textToSpeechURL: null, // the URL to the text to speech converter
+          defaultNotes: false, // use slide notes as default for the text to speech converter
+          defaultText: false, // use slide text as default for the text to speech converter
+          advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+          autoplay: false, // automatically start slideshow
+          defaultDuration: 5, // default duration in seconds if no audio is available
+          defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+          playerOpacity: 0.05, // opacity value of audio player if unfocused
+          playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+          startAtFragment: false // when moving to a slide, start at the current fragment or at the start of the slide
+        },
+
+        customcontrols: {
+          controls: [
+            {
+              id: 'toggle-overview',
+              title: 'Toggle overview (O)',
+              icon: '<i class="fa fa-th"></i>',
+              action: 'Reveal.toggleOverview();'
+            }
+          ]
+        },
+        chart: {
+          defaults: {
+            color: 'lightgray', // color of labels
+            scale: {
+              beginAtZero: true,
+              ticks: { stepSize: 1 },
+              grid: { color: 'lightgray' } // color of grid lines
+            }
+          },
+          line: {
+            borderColor: ['rgba(20,220,220,.8)', 'rgba(220,120,120,.8)', 'rgba(20,120,220,.8)'],
+            borderDash: [
+              [5, 10],
+              [0, 0]
+            ]
+          },
+          bar: { backgroundColor: ['rgba(20,220,220,.8)', 'rgba(220,120,120,.8)', 'rgba(20,120,220,.8)'] },
+          pie: {
+            backgroundColor: [
+              [
+                'rgba(0,0,0,.8)',
+                'rgba(220,20,20,.8)',
+                'rgba(20,220,20,.8)',
+                'rgba(220,220,20,.8)',
+                'rgba(20,20,220,.8)'
+              ]
+            ]
+          },
+          radar: { borderColor: ['rgba(20,220,220,.8)', 'rgba(220,120,120,.8)', 'rgba(20,120,220,.8)'] }
+        },
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          // pass other options into `MathJax.Hub.Config()`
+          TeX: { Macros: { RR: '{\\bf R}' } }
+        },
+        anything: [
+          {
+            className: 'plot',
+            defaults: { width: 500, height: 500, grid: true },
+            initialize: function (container, options) {
+              options.target = '#' + container.id;
+              functionPlot(options);
+            }
+          },
+          {
+            className: 'chart',
+            initialize: function (container, options) {
+              container.chart = new Chart(container.getContext('2d'), options);
+            }
+          },
+          {
+            className: 'anything',
+            initialize: function (container, options) {
+              if (options && options.initialize) {
+                options.initialize(container);
+              }
+            }
+          }
+        ],
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: window.location.search.match(/print-pdf/gi) ? printPlugins : plugins
+      });
+
+      // Change chalkboard theme :
+      function changeTheme(input) {
+        var config = {};
+        config.theme = input.value;
+        Reveal.getPlugin('RevealChalkboard').configure(config);
+        input.blur();
+      }
+
+      // // Handle the message inside the webview
+      // window.addEventListener('message', event => {
+
+      //     const message = event.data; // The JSON data our extension sent
+
+      //     switch (message.command) {
+      //         case 'refactor':
+      //             Reveal.toggleHelp();
+      //     }
+      // });
+
+      if (window.location.search.match(/print-pdf-now/gi)) {
+        setTimeout(() => {
+          window.print();
+        }, 2500);
+      }
+    </script>
+  </body>
+</html>

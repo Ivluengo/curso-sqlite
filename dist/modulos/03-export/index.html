@@ -1,0 +1,1260 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Reveal JS presentation</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css">
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- highlight Theme -->
+  
+  <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai-sublime.min.css">
+  
+	
+		
+	<link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css">
+	
+	
+	
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css">
+  
+	
+
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/theme/robot-lung.css" id="theme">
+  
+  
+
+  <link rel="stylesheet" href="libs/styles/tasklist.css">
+	<link rel="stylesheet" href="libs/styles/iota.css">
+	<link rel="stylesheet" href="libs/styles/layout.css">
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="custom-ivan.css">
+  
+
+   <!-- css list -->
+	
+
+   
+
+</head>
+
+<body>
+
+   
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <h1 class="font-xxxl">SQL</h1>
+<h2 class="font-xl">CRUD</h2>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl"><span class="rosa">C</span>RUD</h3>
+<h4 class="font-lg">Create <span class="emoticono">👉</span> Insert</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- CREATE 👉 INSERT -->
+<h3 class="font-xl"><span class="rosa">C</span>RUD</h3>
+<h4 class="font-lg">Create <span class="emoticono">👉</span> Insert</h4>
+<pre><code class="language-sql">-- Insertar 1 registro añadiendo todos los campos.
+INSERT INTO nombre_tabla VALUES (...);
+
+-- Insertar 1 registro añadiendo SOLO LOS CAMPOS INDICADOS.
+INSERT INTO nombre_tabla (campo1, campo2, campo3) VALUES (valor1, valor2, valor3);
+
+</code></pre>
+<p class="font-sm">Hacerlo de la segunda forma sirve sobretodo para poder insertar los campos de forma desordenada y para no tener que insertar los campos que no sean necesarios.</p>
+<pre><code class="language-sql">-- Ejemplo 1:
+INSERT INTO alumnos VALUES (1, 'Juan', 'Perez', 'Garcia', 'j@j.com'); 
+
+-- Ejemplo 2:
+INSERT INTO alumnos (nombre, primer_apellido, segundo_apellido, email) 
+VALUES ('Juan', 'Perez', 'Garcia', 'j@j.com');
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- CREATE 👉 INSERT -->
+<h3 class="font-xl"><span class="rosa">C</span>RUD</h3>
+<h4 class="font-lg">Create <span class="emoticono">👉</span> Insert</h4>
+<pre><code class="language-sql">-- Insertar varios registros al mismo tiempo.
+INSERT INTO nombre_tabla (campo1, campo2) 
+VALUES  (valor1, valor2),
+        (valor3, valor4),
+        (valor5, valor6);
+</code></pre>
+<pre><code class="language-sql">-- Ejemplo:
+INSERT INTO tipos_de_pago (nombre)
+VALUES  ('Efectivo'), 
+        ('Tarjeta'),
+        ('Transferencia');
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">READ <span class="emoticono">👉</span> SELECT</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- MOSTRAR ALGO COMO RESULTADO -->
+<h3 class="font-lg">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-md">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>MOSTRAR ALGO COMO RESULTADO</strong></p>
+<pre><code class="language-sql">-- Mostrar algo como resultado.
+SELECT 2 + 2, 'hola';
+
+/*  +-------+------+
+    | 2 + 2 | hola |
+    +-------+------+
+    |     4 | hola |
+    +-------+------+  */
+</code></pre>
+<pre><code class="language-sql">-- Mostrar todos los registros de una tabla.
+SELECT * from alumnos;
+
+/*  +-----------+--------+-----------------+------------------+---------+
+    | alumno_id | nombre | primer_apellido | segundo_apellido | email   |
+    +-----------+--------+-----------------+------------------+---------+
+    |         1 | Juan   | Perez           | Garcia           | j@j.com |
+    |         2 | Pedro  | Garcia          | Perez            | p@p.com |
+    +-----------+--------+-----------------+------------------+---------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- SELECCIONAR VARIAS COLUMNAS -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>SELECCIONAR VARIAS COLUMNAS</strong></p>
+<pre><code class="language-sql">-- Mostrar solo resultados que cumplan una condición.
+SELECT alumno_id, nombre
+FROM alumnos;
+
+/*  +-----------+--------+
+    | alumno_id | nombre |
+    +-----------+--------+
+    |         1 | Juan   |
+    |         2 | Pedro  |
+    |         3 | Maria  |
+    +-----------+--------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- SELECCIONAR REGISTROS NO REPETIDOS 👉 DISTINCT -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>SELECCIONAR REGISTROS NO REPETIDOS</strong> <span class="emoticono">👉</span> <em>DISTINCT</em></p>
+<pre><code class="language-sql">-- Mostrar solo resultados no repetidos.
+SELECT DISTINCT profesor_id
+FROM cursos;
+
+/*  +-------------+
+    | profesor_id |
+    +-------------+
+    |           1 |
+    |           2 |
+    +-------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- SELECCIONAR SOLO UN NÚMERO DE REGISTROS 👉 LIMIT-->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>SELECCIONAR SOLO UN NÚMERO DE REGISTROS</strong> <span class="emoticono">👉</span> <em>LIMIT</em></p>
+<pre><code class="language-sql">-- Mostrar solo 2 resultados.
+SELECT nombre
+FROM cursos;
+
+SELECT nombre
+FROM cursos
+LIMIT 2;
+
+/*                LIMIT 2
+    +--------+  +--------+ 
+    | nombre |  | nombre |
+    +--------+  +--------+
+    | HTML   |  | HTML   |
+    | CSS    |  | CSS    |
+    | JS     |  +--------+
+    +--------+              */
+</code></pre>
+<p>¡Ojo! La cláusula <strong>LIMIT</strong> debería ir siempre al final.</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span></p>
+<pre><code class="language-sql">-- Mostrar solo resultados que cumplan una condición.
+SELECT *
+FROM alumnos
+WHERE email = 'j@j.com';
+
+/*  +-----------+--------+-----------------+------------------+---------+
+    | alumno_id | nombre | primer_apellido | segundo_apellido | email   |
+    +-----------+--------+-----------------+------------------+---------+
+    |         1 | Juan   | Perez           | Garcia           | j@j.com |
+    +-----------+--------+-----------------+------------------+---------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span></p>
+<pre><code class="language-sql">-- Mostrar solo resultados que cumplan una condición.
+SELECT *
+FROM alumnos
+WHERE id &gt; 1;
+
+/*  +-----------+--------+-----------------+------------------+---------+
+    | alumno_id | nombre | primer_apellido | segundo_apellido | email   |
+    +-----------+--------+-----------------+------------------+---------+
+    |         2 | Pedro  | Garcia          | Perez            | p@p.com |
+    |         3 | Maria  | López           | Martínez         | m@m.com |
+    +-----------+--------+-----------------+------------------+---------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 OPERADORES -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>OPERADORES</em></p>
+<pre><code class="language-sql">-- Operadores de comparación.
+SELECT * FROM alumnos WHERE id &gt; 1;  -- Mayor que
+SELECT * FROM alumnos WHERE id &gt;= 1; -- Mayor o igual que
+SELECT * FROM alumnos WHERE id &lt; 1;  -- Menor que
+SELECT * FROM alumnos WHERE id &lt;= 1; -- Menor o igual que
+SELECT * FROM alumnos WHERE id = 1;  -- Igual que
+SELECT * FROM alumnos WHERE id != 1; -- Distinto de
+SELECT * FROM alumnos WHERE id &lt;&gt; 1; -- Distinto de
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 AND -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em><span class="azul u">AND</span>, OR y NOT</em></p>
+<pre><code class="language-sql">-- Operadores de comparación.
+SELECT curso_id, nombre, fecha_inicio, profesor_id 
+FROM cursos 
+WHERE fecha_inicio &gt;= '2023-01-01' AND fecha_inicio &lt;= '2023-05-31';
+
+/*  +----------+--------+--------------+-------------+
+    | curso_id | nombre | fecha_inicio | profesor_id |
+    +----------+--------+--------------+-------------+
+    |        1 | HTML   | 2023-03-15   |           1 |
+    |        2 | CSS    | 2023-04-05   |           1 |
+    +----------+--------+--------------+-------------+/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉OR -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>AND, <span class="azul u">OR</span> y NOT</em></p>
+<pre><code class="language-sql">-- Operadores de comparación.
+SELECT curso_id, nombre, fecha_inicio, profesor_id 
+FROM cursos 
+WHERE fecha_inicio &lt; '2023-02-01' OR profesor_id = 2;
+
+/*  +----------+--------+--------------+-------------+
+    | curso_id | nombre | fecha_inicio | profesor_id |
+    +----------+--------+--------------+-------------+
+    |        3 | JS     | 2023-06-20   |           2 |
+    +----------+--------+--------------+-------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 NOT -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>AND, OR y <span class="azul u">NOT</span></em></p>
+<pre><code class="language-sql">-- Operadores de comparación.
+SELECT curso_id, nombre, fecha_inicio, profesor_id 
+FROM cursos 
+WHERE NOT (fecha_inicio &lt; '2023-02-01' OR profesor_id = 2);
+
+/*  +----------+--------+--------------+-------------+
+    | curso_id | nombre | fecha_inicio | profesor_id |
+    +----------+--------+--------------+-------------+
+    |        1 | HTML   | 2023-03-15   |           1 |
+    |        2 | CSS    | 2023-04-05   |           1 |
+    +----------+--------+--------------+-------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 IN (valor, valor, valor) -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>IN (valor, valor, valor)</em></p>
+<pre><code class="language-sql">-- Obtener cursos que sean de HTML o de CSS
+
+SELECT curso_id, nombre, precio
+FROM cursos 
+WHERE nombre = 'HTML' OR nombre = 'CSS';
+
+
+SELECT curso_id, nombre, precio
+FROM cursos 
+WHERE nombre IN ('HTML', 'CSS');
+
+/*  +----------+--------+--------+
+    | curso_id | nombre | precio |
+    +----------+--------+--------+
+    |        1 | HTML   |  50.00 |
+    |        2 | CSS    | 100.00 |
+    +----------+--------+--------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 BETWEEN -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>BETWEEN</em></p>
+<pre><code class="language-sql">-- Obtener cursos entre una fecha y otra.
+
+SELECT curso_id, nombre, precio
+FROM cursos 
+WHERE fecha_inicio BETWEEN '2023-01-01' AND '2023-05-31';
+
+/*  +----------+--------+--------+
+    | curso_id | nombre | precio |
+    +----------+--------+--------+
+    |        1 | HTML   |  50.00 |
+    |        2 | CSS    | 100.00 |
+    +----------+--------+--------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 LIKE 'B%' -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>LIKE ‘B%’</em></p>
+<pre><code class="language-sql">-- Obtener profesores que EMPIECEN por unas letras.
+
+SELECT nombre, primer_apellido
+FROM profesores 
+WHERE nombre LIKE 'b%';
+
+/*  +---------+-----------------+
+    | nombre  | primer_apellido |
+    +---------+-----------------+
+    | Bárbara | Imbernón        |
+    | Berto   | Yánez           |
+    +---------+-----------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 LIKE '%B' -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>LIKE ‘%B’</em></p>
+<pre><code class="language-sql">-- Obtener profesores que TERMINEN por unas letras.
+
+SELECT nombre, primer_apellido
+FROM profesores 
+WHERE primer_apellido LIKE '%z';
+
+/*  +--------+-----------------+
+    | nombre | primer_apellido |
+    +--------+-----------------+
+    | Samuel | Rodríguez       |
+    | Berto  | Yánez           |
+    +--------+-----------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 LIKE '%B%' -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>LIKE ‘%B%’</em></p>
+<pre><code class="language-sql">-- Obtener profesores cuyo email sea de hackaboss.
+
+SELECT nombre, email
+FROM profesores 
+WHERE email LIKE '%hackaboss%';
+
+/*  +---------+---------------------+
+    | nombre  | email               |
+    +---------+---------------------+
+    | Bárbara | barb@hackaboss.com  |
+    | Berto   | berto@hackaboss.com |
+    +---------+---------------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 LIKE '__B' -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>LIKE ‘__B’</em></p>
+<pre><code class="language-sql">-- Obtener profesores cuyo email sea de hackaboss.
+
+SELECT nombre, primer_apellido
+FROM profesores 
+WHERE primer_apellido LIKE '%z';
+
+SELECT nombre, primer_apellido
+FROM profesores 
+WHERE primer_apellido LIKE '____z';
+
+/*             '%z'                          '____z'
+    +--------+-----------------+   +--------+-----------------+
+    | nombre | primer_apellido |   | nombre | primer_apellido |
+    +--------+-----------------+   +--------+-----------------+
+    | Samuel | Rodríguez       |   | Berto  | Yánez           |
+    | Berto  | Yánez           |   +--------+-----------------+
+    +--------+-----------------+                                 */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR 👉 WHERE 👉 IS NULL -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE</strong></span> <span class="emoticono">👉</span> <em>IS NULL</em></p>
+<pre><code class="language-sql">-- Obtener profesores cuyo segundo apellido sea nulo.
+
+SELECT nombre, segundo_apellido
+FROM profesores 
+WHERE segundo_apellido IS NULL;
+
+SELECT nombre, segundo_apellido
+FROM profesores 
+WHERE segundo_apellido IS NOT NULL;
+
+/*                                             IS NOT NULL
+         IS NULL                  +---------+------------------+         
++--------+------------------+     | nombre  | segundo_apellido |
+| nombre | segundo_apellido |     +---------+------------------+
++--------+------------------+     | Ivan    | Padrosa          |
+| Berto  | NULL             |     | Samuel  | Rey              |
++--------+------------------+     | Bárbara | Fuentes          |
+                                  +---------+------------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- COLUMNAS QUE CALCULAN -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>COLUMNAS QUE CALCULAN</strong></p>
+<pre><code class="language-sql">-- Mostrar una columna que calcula un resultado.
+SELECT 
+    producto_id, 
+    nombre, 
+    precio, 
+    precio + precio * 0.21
+FROM productos;
+
+/*  +-------------+-----------------------------+--------+------------------------+
+    | producto_id | nombre                      | precio | precio + precio * 0.21 |
+    +-------------+-----------------------------+--------+------------------------+
+    |           1 | Teléfono inteligente        | 599.99 |               725.9879 |
+    |           2 | Televisor                   | 299.99 |               362.9879 |
+    |           3 | Camiseta de algodón         |  29.99 |                36.2879 |
+    |           4 | Set de utensilios de cocina |  79.99 |                96.7879 |
+    +-------------+-----------------------------+--------+------------------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- ALIAS PARA COLUMNAS 👉 AS -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>ALIAS PARA COLUMNAS</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>AS</strong></span></p>
+<pre><code class="language-sql">-- Mostrar una columna que calcula un resultado.
+SELECT 
+    producto_id, 
+    nombre, 
+    precio, 
+    precio + precio * 0.21 AS 'Precio + IVA'
+FROM productos;
+
+/*  +-------------+-----------------------------+--------+--------------+
+    | producto_id | nombre                      | precio | Precio + IVA |
+    +-------------+-----------------------------+--------+--------------+
+    |           1 | Teléfono inteligente        | 599.99 |     725.9879 |
+    |           2 | Televisor                   | 299.99 |     362.9879 |
+    |           3 | Camiseta de algodón         |  29.99 |      36.2879 |
+    |           4 | Set de utensilios de cocina |  79.99 |      96.7879 |
+    +-------------+-----------------------------+--------+--------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- EJERCICIO 01 -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left"><span class="rosa"><strong>EJERCICIO 01</strong></p>
+<div class="left ">
+<ul>
+<li>De la tabla de <code>items_pedido</code> de la BBDD de la <code>tienda</code>:</li>
+<li>Consigue los items que tengan un número de pedido de <code>6</code></li>
+<li>cuyo precio total (cantidad * precio_unitario) sea <code>mayor de 30</code></li>
+</ul>
+<!-- 
+SELECT *
+FROM items_pedido
+WHERE pedido_id = 6 AND (cantidad * precio_unitario) > 30;
+ -->
+</div>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- EJERCICIO 02 -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left"><span class="rosa"><strong>EJERCICIO 02</strong></p>
+<div class="left ">
+<ul>
+<li>De la tabla de <code>productos</code> de la BBDD <code>tienda</code>:</li>
+<li>Consigue los items que tengan una <code>cantidad_stock</code> igual a <code>90, 14 y 70</code>.</li>
+</ul>
+</div>
+<!-- 
+SELECT *
+FROM productos
+WHERE cantidad_stock IN (90, 14, 70);
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- EJERCICIO 03 -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left"><span class="rosa"><strong>EJERCICIO 03</strong></p>
+<div class="left ">
+<ul>
+<li>De la tabla de <code>productos</code> de la BBDD <code>tienda</code>:</li>
+<li>Consigue los items que tengan un <code>precio_unitario</code> entre <code>2 y 4</code>€.</li>
+</ul>
+</div>
+<!-- 
+SELECT * 
+FROM productos
+WHERE precio_unitario BETWEEN 2 AND 4;
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- EJERCICIO 04 -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left"><span class="rosa"><strong>EJERCICIO 04</strong></p>
+<div class="left ">
+<ul>
+<li>De la tabla de <code>consumidores</code> de la BBDD <code>tienda</code>:</li>
+<li>Consigue los items que su <code>direccion</code> sea una <code>Calle</code> o una <code>Avenida</code>.</li>
+<li>y que su número de teléfono tenga algún <code>9</code>.</li>
+</ul>
+</div>
+<!-- 
+SELECT *
+FROM consumidores
+WHERE 
+	(direccion LIKE 'Calle%' OR direccion LIKE 'Avenida%')
+    AND telefono LIKE '%9%';
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- EJERCICIO 05 -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left"><span class="rosa"><strong>EJERCICIO 05</strong></p>
+<div class="left ">
+<ul>
+<li>De la tabla de <code>pedidos</code> de la BBDD <code>tienda</code>:</li>
+<li>Consigue los items que no hayan sido enviados aún.</li>
+</ul>
+</div>
+<!-- 
+SELECT pedido_id, consumidor_id, fecha_envio
+FROM pedidos
+WHERE fecha_envio IS NOT NULL;
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- ORDENAR 👉 ORDER BY -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>ORDENAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>ORDER BY</strong></span></p>
+<pre><code class="language-sql">-- Mostrar los resultados ordenados alfabéticamente.
+SELECT alumno_id, nombre
+FROM alumnos
+ORDER BY nombre;
+
+/*  +-----------+--------+
+    | alumno_id | nombre |
+    +-----------+--------+
+    |         1 | Juan   |
+    |         3 | Maria  |
+    |         2 | Pedro  |
+    +-----------+--------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- ORDENAR 👉 ORDER BY 👉 ASC and DESC -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>ORDENAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>ORDER BY</strong></span> <span class="emoticono">👉</span> <em>ASC and DESC</em></p>
+<pre><code class="language-sql">-- Mostrar los resultados ordenados de forma ASCendente y DESCendente.
+SELECT profesor_id, nombre, primer_apellido
+FROM profesores
+ORDER BY nombre ASC;
+
+SELECT profesor_id, nombre, primer_apellido
+FROM profesores
+ORDER BY nombre DESC;
+
+/*                  ASC                                           DESC
+    +-------------+---------+-----------------+  +-------------+---------+-----------------+
+    | profesor_id | nombre  | primer_apellido |  | profesor_id | nombre  | primer_apellido |
+    +-------------+---------+-----------------+  +-------------+---------+-----------------+
+    |           3 | Bárbara | Imbernón        |  |           2 | Samuel  | Rodríguez       |
+    |           4 | Berto   | Yánez           |  |           1 | Ivan    | Luengo          |
+    |           1 | Ivan    | Luengo          |  |           4 | Berto   | Yánez           |
+    |           2 | Samuel  | Rodríguez       |  |           3 | Bárbara | Imbernón        |
+    +-------------+---------+-----------------+  +-------------+---------+-----------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- FILTRAR Y ORDENAR 👉 WHERE … ORDER BY -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>FILTRAR Y ORDENAR</strong> <span class="emoticono">👉</span> <span class="rosa"><strong>WHERE … ORDER BY</strong></span></p>
+<pre><code class="language-sql">-- Mostrar los resultados filtrados por email ordenados alfabéticamente.
+SELECT alumno_id, nombre
+FROM alumnos
+WHERE email LIKE '%.com' -- 'lo que sea .com'
+ORDER BY nombre;
+
+/*  +-----------+--------+
+    | alumno_id | nombre |
+    +-----------+--------+
+    |         1 | Juan   |
+    |         3 | Maria  |
+    |         2 | Pedro  |
+    +-----------+--------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- ORDEN DE LAS CLÁUSULAS -->
+<h3 class="font-xl">C<span class="rosa">R</span>UD</h3>
+<h4 class="font-lg">Read <span class="emoticono">👉</span> Select</h4>
+<p class="left w-90 m-auto"><strong>¡ORDEN DE LAS CLÁUSULAS!</strong> </p>
+<pre><code class="language-sql">-- El órden en que ponemos las cláusulas es super importante
+SELECT *    
+FROM productos
+WHERE precio_unitario &gt; 2
+ORDER BY precio_unitario DESC
+LIMIT 5;
+
+/*  +-------------+-----------------------------+--------+--------------+
+    | producto_id | nombre                      | precio | Precio + IVA |
+    +-------------+-----------------------------+--------+--------------+
+    |           1 | Teléfono inteligente        | 599.99 |     725.9879 |
+    |           2 | Televisor                   | 299.99 |     362.9879 |
+    |           3 | Camiseta de algodón         |  29.99 |      36.2879 |
+    |           4 | Set de utensilios de cocina |  79.99 |      96.7879 |
+    +-------------+-----------------------------+--------+--------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">CR<span class="rosa">U</span>D</h3>
+<h4 class="font-lg">UPDATE <span class="emoticono">👉</span> UPDATE</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- UPDATE -->
+<h3 class="font-xl">CR<span class="rosa">U</span>D</h3>
+<h4 class="font-lg">UPDATE</h4>
+<pre><code class="language-sql">UPDATE nombre_tabla SET columna = valor WHERE condicion;
+
+-- Actualizar 1 columna de 1 registro.
+UPDATE profesores 
+SET nombre = 'Juan'
+WHERE profesor_id = 1;
+
+-- Actualizar varias columnas de 1 registro.
+UPDATE profesores 
+SET nombre = 'Juan', segundo_apellido = 'Hernández'
+WHERE profesor_id = 1;
+
+-- Actualizar varias columnas de varios registro.
+UPDATE matriculas
+SET precio_pagado = precio_pagado + 10
+WHERE alumno_id = 1; 
+</code></pre>
+<p class="font-xs">¡Ojo! Porque depende de la configuración que tengas no te dejará actualizar VARIOS REGISTROS. Para que te eje habría que desmarcar la casilla <code>Safe Updates</code> dentro de la pestaña <code>SQL Editor</code> de las <em>Preferencias</em> de <span class="u">MySQL Workbench</span>.</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- EJERCICIO 01 -->
+<h3 class="font-xl">CR<span class="rosa">U</span>D</h3>
+<h4 class="font-lg">UPDATE</h4>
+<p class="left"><span class="rosa"><strong>EJERCICIO 01</strong></span></p>
+<div class="left ">
+<ul>
+<li>De la tabla de <code>consumidores</code> de la BBDD de la <code>tienda</code>:
+<ul>
+<li>Dale a aquellos que han nacido más tarde de 1990</li>
+<li>50 puntos extra</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- 
+UPDATE consumidores
+SET puntos = puntos + 50
+WHERE fecha_nacimiento >= '1991-01-01';
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">CRU<span class="rosa">D</span></h3>
+<h4 class="font-lg">DELETE <span class="emoticono">👉</span> DELETE</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- DELETE -->
+<h3 class="font-xl">CRU<span class="rosa">D</span></h3>
+<h4 class="font-lg">DELETE</h4>
+<pre><code class="language-sql">DELETE FROM nombre_tabla WHERE condicion;
+
+-- Borrar 1 registro
+DELETE FROM cursos
+WHERE curso_id = 1;
+
+-- Borrar varios registros
+DELETE FROM matriculas
+WHERE alumno_id = 1;
+</code></pre>
+<p>¡👀! ¡CUIDADO CON DEJAR LA CLAUSULA DELETE SIN LA CONDICIÓN!
+<strong><div class="rosa">¡BORRARÁS TODA LA TABLA!</div></strong></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1 class="invisible" aria-hidden="true">THE END</h1>
+<p class="font-xxxl">🔚</p>
+
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  <div class="line top"></div>
+  <div class="line bottom"></div>
+  <div class="line left"></div>
+  <div class="line right"></div>
+
+  <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+<script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+
+
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+  
+
+<script>
+  const printPlugins = [
+      RevealNotes,
+      RevealHighlight,
+      RevealMath.MathJax3,
+      RevealAnimate,
+      
+			RevealEmbedTweet,
+			RevealChart,
+		];
+
+		const plugins =  [...printPlugins,
+		RevealZoom, 
+		RevealSearch, 
+				RevealMarkdown, 
+				RevealMenu, 
+				RevealFullscreen,
+				RevealAnything,
+				//RevealAudioSlideshow,
+				//RevealAudioRecorder,
+				RevealCustomControls, 
+				// poll
+				// question
+				// seminar
+				Verticator 
+				 ]
+
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+      controlsTutorial: true,
+      controlsLayout: 'bottom-right',
+      controlsBackArrows: 'faded',
+      progress: true,
+      slideNumber: false,
+      //#showSlideNumber "all" "print" "speaker"
+      hash: true, //# hash: false,
+      //# respondToHashChanges: true,
+      //# history: false,
+      keyboard: true,
+      //#keyboardCondition: null,
+      overview: true,
+      center: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      //#navigationMode: 'default', linear grid
+      shuffle: false,
+      fragments: true,
+      fragmentInURL: false,
+      embedded: false,
+      help: true,
+      //#pause: true
+      showNotes: false,
+      autoPlayMedia: false, // TODO fix this to a nullable value
+      //#preloadIframes: null. true false
+      //#autoAnimate: true
+      //#autoAnimateMatcher: null,
+      //#autoAnimateEasing: 'ease',
+      //autoAnimateDuration: 1.0,
+      //#autoAnimateUnmatched: true
+      //#autoAnimateStyles: []
+      autoSlide: 0, // TODO fix this to a falseable value
+      autoSlideStoppable: true,
+      autoSlideMethod: '0',
+      defaultTiming: 120,
+      mouseWheel: false,
+      //#previewLinks: false
+      //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+      //#postMessageEvents: false,
+      //#focusBodyOnPageVisibilityChange: true,
+      transition: 'slide',
+      transitionSpeed: 'fast',
+      backgroundTransition: 'fade',
+      //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+      //#pdfSeparateFragments: true,
+      //#pdfPageHeightOffset: -1,
+      viewDistance: 3,
+      //#mobileViewDistance: 2,
+      display: 'block',
+      //#hideInactiveCursor: true,
+      //#hideCursorTime: 5000
+
+      // Parallax Background
+      parallaxBackgroundImage: '',
+      parallaxBackgroundSize: '',
+      parallaxBackgroundHorizontal: 0,
+      parallaxBackgroundVertical: 0,
+
+      //Presentation Size
+      width: 960,
+			height: 700,
+			margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2,
+      disableLayout: false,
+
+      audio: {
+        prefix: 'audio/', // audio files are stored in the "audio" folder
+        suffix: '.ogg', // audio files have the ".ogg" ending
+        textToSpeechURL: null, // the URL to the text to speech converter
+        defaultNotes: false, // use slide notes as default for the text to speech converter
+        defaultText: false, // use slide text as default for the text to speech converter
+        advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+        autoplay: false, // automatically start slideshow
+        defaultDuration: 5, // default duration in seconds if no audio is available
+        defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+        playerOpacity: 0.05, // opacity value of audio player if unfocused
+        playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+        startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+      },
+      
+			customcontrols: {
+					controls: [
+      						{
+						  id: 'toggle-overview',
+						  title: 'Toggle overview (O)',
+						  icon: '<i class="fa fa-th"></i>',
+						  action: 'Reveal.toggleOverview();'
+						}
+						
+				]
+			},
+			chart: {
+					defaults: { 
+						color: 'lightgray', // color of labels
+						scale: { 
+							beginAtZero: true, 
+							ticks: { stepSize: 1 },
+							grid: { color: "lightgray" } , // color of grid lines
+						},
+					},
+					line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ] }, 
+					bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+					pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+					radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			},
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				anything: [ 
+				{
+		className: "plot",
+		defaults: {width:500, height: 500, grid:true},
+		initialize: (function(container, options){ options.target = "#"+container.id; functionPlot(options) })
+	 },
+	 {
+		className: "chart",  
+		initialize: (function(container, options){ container.chart = new Chart(container.getContext("2d"), options);  })
+	 },
+	 {
+		className: "anything",
+		initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} })
+	 },
+					],
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: (window.location.search.match(/print-pdf/gi) ? printPlugins : plugins ) 
+		});
+			
+
+
+	    // Change chalkboard theme : 
+		function changeTheme(input) {
+			var config = {};
+			config.theme = input.value;
+			Reveal.getPlugin("RevealChalkboard").configure(config);
+			input.blur();
+		}
+
+		// // Handle the message inside the webview
+        // window.addEventListener('message', event => {
+
+        //     const message = event.data; // The JSON data our extension sent
+
+        //     switch (message.command) {
+        //         case 'refactor':
+        //             Reveal.toggleHelp();
+        //     }
+        // });
+
+		if (window.location.search.match(/print-pdf-now/gi)) {
+      		setTimeout(() => {
+				window.print();
+			  }, 2500);
+			
+    }
+</script>
+
+</body>
+
+</html>

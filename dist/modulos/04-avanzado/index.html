@@ -1,0 +1,1644 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Reveal JS presentation</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css">
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- highlight Theme -->
+  
+  <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai-sublime.min.css">
+  
+	
+		
+	<link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css">
+	
+	
+	
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css">
+  
+	
+
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/theme/robot-lung.css" id="theme">
+  
+  
+
+  <link rel="stylesheet" href="libs/styles/tasklist.css">
+	<link rel="stylesheet" href="libs/styles/iota.css">
+	<link rel="stylesheet" href="libs/styles/layout.css">
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="custom-ivan.css">
+  
+
+   <!-- css list -->
+	
+
+   
+
+</head>
+
+<body>
+
+   
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <h1 class="font-xxxl">SQL</h1>
+<h2 class="font-xl">Cláusulas avanzadas</h2>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">Unir columnas de varias tablas</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- JOINS -->
+<h3 class="font-xl">JOINS</h3>
+<p>Si observamos la tabla <code>matriculas</code>.</p>
+<p><img src="./escuela/imagenes/tabla-matriculas.png" alt="Tabla de las matrículas"></p>
+<p>Vemos que tenemos alguna información pero no toda, porque tenemos muchos <code>id</code>.</p>
+<p>Podemos hacer peticiones juntando varias tablas usando la cláusula <span class="rosa font-xl"><strong>JOIN</strong></span></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">INNER JOINS</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- INNER JOINS -->
+<h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">INNER JOINS</h4>
+<p>Los <code>INNER JOINS</code> son las uniones POR DEFECTO.</p>
+<pre><code class="language-sql">-- Seleccionar datos de la tabla matriculas y la tabla cursos.
+
+SELECT *
+FROM matriculas
+INNER JOIN alumnos
+    ON matriculas.alumno_id = alumnos.alumno_id;
+
+/*
++--------------+------------+---------------+-----------+----------+-----------+--------+-----------------+------------------+-----------------+
+| matricula_id | fecha      | precio_pagado | alumno_id | curso_id | alumno_id | nombre | primer_apellido | segundo_apellido | email           |
++--------------+------------+---------------+-----------+----------+-----------+--------+-----------------+------------------+-----------------+
+|            1 | 2023-01-25 |         45.00 |         1 |        1 |         1 | Jorge  | López           | García           | jorge@lopez.com |
+|            2 | 2023-02-12 |         50.00 |         2 |        1 |         2 | Javier | Martínez        | López            | xavi@m.com      |
+|            3 | 2023-03-05 |        195.00 |         1 |        3 |         1 | Jorge  | López           | García           | jorge@lopez.com |
++--------------+------------+---------------+-----------+----------+-----------+--------+-----------------+------------------+-----------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- INNER JOINS -->
+<h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">INNER JOINS</h4>
+<p>Si tenemos alguna columna repetida en las dos tablas <strong>TENDREMOS QUE DECIRLE DE QUÉ TABLA LO COGEMOS</strong>.</p>
+<pre><code class="language-sql">-- Seleccionar columnas que se repiten en la tabla matriculas y la tabla cursos.
+
+SELECT matricula_id, alumnos.alumno_id ,precio_pagado, nombre, primer_apellido
+FROM matriculas
+INNER JOIN alumnos
+    ON matriculas.alumno_id = alumnos.alumno_id;
+
+/*
++--------------+-----------+---------------+--------+-----------------+
+| matricula_id | alumno_id | precio_pagado | nombre | primer_apellido |
++--------------+-----------+---------------+--------+-----------------+
+|            1 |         1 |         45.00 | Jorge  | López           |
+|            2 |         2 |         50.00 | Javier | Martínez        |
+|            3 |         1 |        195.00 | Jorge  | López           |
++--------------+-----------+---------------+--------+-----------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- INNER JOINS - ALIAS DE TABLA -->
+<h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">INNER JOINS</h4>
+<p>Nos permite ponerle alias a los nombres de las tablas para que no sea tan largo. LO SOLEMOS ABREVIAR A UNA SOLA LETRA</p>
+<p class="left m-auto w-90"><strong>ALIAS DE TABLA</strong></p>
+<pre><code class="language-sql">-- Abreviar los nombres de las tablas.
+
+SELECT matricula_id, a.alumno_id ,precio_pagado, nombre, primer_apellido
+FROM matriculas m
+INNER JOIN alumnos a
+    ON m.alumno_id = a.alumno_id;
+
+/*
++--------------+-----------+---------------+--------+-----------------+
+| matricula_id | alumno_id | precio_pagado | nombre | primer_apellido |
++--------------+-----------+---------------+--------+-----------------+
+|            1 |         1 |         45.00 | Jorge  | López           |
+|            2 |         2 |         50.00 | Javier | Martínez        |
+|            3 |         1 |        195.00 | Jorge  | López           |
++--------------+-----------+---------------+--------+-----------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- INNER JOINS - EJERCICIO 01 -->
+<h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">INNER JOINS</h4>
+<p class="left"><span class="rosa"><strong>EJERCICIO 01</strong></p>
+<div class="left ">
+<ul>
+<li>Coge la tabla de <code>items_pedido</code> de la BBDD <code>tienda</code>:
+<ul>
+<li>Y la juntas con la tabla <code>productos</code></li>
+<li>Y muestra solo las columnas <code>pedido_id</code>, <code>producto_id</code>, <code>nombre</code> y <code>cantidad_stock</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- 
+SELECT pedido_id, ip.producto_id, nombre, cantidad_stock
+FROM items_pedido ip
+JOIN productos p
+    ON ip.producto_id = p.producto_id;
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- INNER JOINS - JUNTAR MÁS DE DOS TABLAS -->
+<h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">INNER JOINS</h4>
+<p class="left m-auto w-90"><strong>JUNTAR MÁS DE DOS TABLAS</strong></p>
+<pre><code class="language-sql">-- Juntar las tablas `matriculas`, `alumnos` y `cursos`.
+
+SELECT matricula_id, precio_pagado, a.nombre AS nombre_alumno, c.nombre AS curso
+FROM matriculas m
+INNER JOIN alumnos a
+	ON a.alumno_id = m.alumno_id
+INNER JOIN cursos c
+	ON c.curso_id = m.curso_id;
+
+/*
++--------------+---------------+---------------+-------+
+| matricula_id | precio_pagado | nombre_alumno | curso |
++--------------+---------------+---------------+-------+
+|            1 |         45.00 | Jorge         | HTML  |
+|            2 |         50.00 | Javier        | HTML  |
+|            3 |        195.00 | Jorge         | JS    |
++--------------+---------------+---------------+-------+*/
+</code></pre>
+<p>Fíjate en que he puesto <strong>ALIAS</strong> a las columnas porque si no nos liamos mucho.</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- INNER JOINS - EJERCICIO 02 -->
+<h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">INNER JOINS</h4>
+<p class="left"><span class="rosa"><strong>EJERCICIO 02</strong></p>
+<div class="left ">
+<ul>
+<li>Coge la tabla de <code>pagos</code> de la BBDD <code>facturacion</code>:
+<ul>
+<li>Y la juntas con la tabla <code>metodos_pago</code> y la de <code>clientes</code></li>
+<li>Y muestra solo las columnas <code>fecha</code>, <code>factura_id</code>, <code>cantidad</code>, <code>nombre</code> y <code>metodo_pago</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- 
+SELECT fecha, factura_id, cantidad, c.nombre, mp.nombre
+FROM pagos p
+INNER JOIN clientes c
+	ON p.cliente_id = c.cliente_id
+INNER JOIN metodos_pago mp
+	ON p.metodo_pago = mp.metodo_pago_id;
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">OUTER JOINS</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- OUTER JOINS -->
+<h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">OUTER JOINS</h4>
+<p>Cuando hacemos un <strong>JOIN</strong> normal, nunca se van a mostrar los resultados de aquellos registros que no cumplan una condición.</p>
+<pre><code class="language-sql">-- Juntar las tablas `matriculas`, `alumnos`.
+
+SELECT a.alumno_id, nombre, precio_pagado
+FROM alumnos a
+JOIN matriculas m
+	ON m.alumno_id = a.alumno_id;
+
+/*
++-----------+--------+---------------+
+| alumno_id | nombre | precio_pagado |
++-----------+--------+---------------+
+|         1 | Jorge  |         45.00 |
+|         2 | Javier |         50.00 |
+|         1 | Jorge  |        195.00 |
++-----------+--------+---------------+*/
+</code></pre>
+<p class="font-sm">Yo sé que hay un alumno más que no aparece porque no cumple la condición de que <code>ON m.alumno_id = a.alumno_id</code>.</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- OUTER JOINS -- LEFT JOIN -->
+<h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">OUTER JOINS</h4>
+<p class="left m-auto w-90"><strong>LEFT JOIN</strong></p>
+<pre><code class="language-sql">-- Juntar las tablas `matriculas`, `alumnos` mostrando 
+-- todos los datos de la tabla de la &quot;izquierda&quot; (la primera tabla).
+
+SELECT a.alumno_id, nombre, precio_pagado
+FROM alumnos a
+LEFT JOIN matriculas m
+	ON m.alumno_id = a.alumno_id;
+
+/*
++-----------+--------+---------------+
+| alumno_id | nombre | precio_pagado |
++-----------+--------+---------------+
+|         1 | Jorge  |        195.00 |
+|         1 | Jorge  |         45.00 |
+|         2 | Javier |         50.00 |
+|         3 | Sarah  |          NULL |
++-----------+--------+---------------+*/
+</code></pre>
+<p>La versión <strong>RIGHT JOIN</strong> hace exactamente lo mismo, pero cogiendo los datos de la “derecha” (la segunda tabla).</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- OUTER JOINS -- LEFT JOIN -->
+<h3 class="font-xl">JOINS</h3>
+<h4 class="font-lg">CLAUSULA <span class="emoticono">👉</span> <span class="rosa">USING</span></h4>
+<p>Si coincide que hacemos un <strong>JOIN</strong> y que las dos columnas por las que queremos juntar las tablas se llaman igual, podemos usar la cláusila <strong>USING</strong> en su lugar.</p>
+<pre><code class="language-sql">-- Juntar las tablas `matriculas` y `alumnos`
+
+SELECT a.alumno_id, nombre, precio_pagado
+FROM alumnos a
+LEFT JOIN matriculas m
+	USING (alumno_id);
+
+/*
++-----------+--------+---------------+
+| alumno_id | nombre | precio_pagado |
++-----------+--------+---------------+
+|         1 | Jorge  |        195.00 |
+|         1 | Jorge  |         45.00 |
+|         2 | Javier |         50.00 |
+|         3 | Sarah  |          NULL |
++-----------+--------+---------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">UNIONS</h3>
+<h4 class="font-lg">Unir filas de varias tablas</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- UNIONS -->
+<h3 class="font-xl">UNIONS</h3>
+<p>Podemos unir más filas de otras tablas si combinamos una <strong>QUERY</strong> con otra usando la cláusila <strong>UNION</strong></p>
+<pre><code class="language-sql">-- Añadir las filas de la tabla `alumnos` a las de la tabla `profesores`
+
+SELECT nombre, primer_apellido
+FROM profesores
+UNION
+SELECT nombre, primer_apellido
+FROM alumnos;
+
+/*
++--------+-----------------+
+| nombre | primer_apellido |
++--------+-----------------+
+| Ivan   | Luengo          |
+| Samuel | Rodríguez       |
+| Berto  | Yanez           |
+| Juan   | Perez           |
+| Pedro  | Garcia          |
+| Maria  | López           |
++--------+-----------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- UNIONS -->
+<h3 class="font-xl">UNIONS</h3>
+<p class="font-sm">Por ejemplo, podemos unir la misma tabla varias veces añadiendo una columna extra que defina u estado distinto para cada unión.</p>
+<p class="font-sm">Ej: Todos los <code>pedidos</code> que sean de este año que tengan un estado <code>ACTIVO</code> y todos los pedidos anteriores que tengan un estado <code>ANTIGUO</code></p>
+<pre><code class="language-sql">-- Duplicar las filas de la tabla `productos`.
+
+SELECT pedido_id, fecha_pedido, 'ACTIVO' AS estado
+FROM pedidos
+WHERE fecha_pedido &gt;= '2023-01-01'
+UNION
+SELECT pedido_id, fecha_pedido, 'ANTIGUO' AS estado
+FROM pedidos
+WHERE fecha_pedido &lt; '2023-01-01'
+LIMIT 3;
+
+/*
++-----------+--------------+---------+
+| pedido_id | fecha_pedido | estado  |
++-----------+--------------+---------+
+|         1 | 2023-01-30   | ACTIVO  |
+|         2 | 2022-08-02   | ANTIGUO |
+|         3 | 2021-12-01   | ANTIGUO |
++-----------+--------------+---------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- UNIONS - EJERCICIO 01 -->
+<h3 class="font-xl">UNIONS</h3>
+<p class="left"><span class="rosa"><strong>EJERCICIO 01</strong></p>
+<div class="left ">
+<ul>
+<li>Coge la tabla de <code>consumidores</code> de la BBDD <code>tienda</code>:
+<ul>
+<li>Y usando <strong>UNIONS</strong> muestra las columnas <code>nombre</code>, <code>apellidos</code>, <code>ciudad</code>, <code>puntos</code> y una columna extra que defina si el consumidor es de tipo <strong>ORO</strong>, <strong>PLATA</strong>, <strong>BRONCE</strong> o <strong>NORMAL</strong>.</li>
+<li>Si tiene más de 3000 puntos será <strong>ORO</strong></li>
+<li>Si tiene más de 2000 puntos será <strong>PLATA</strong></li>
+<li>Si tiene más de 1000 puntos será <strong>BRONCE</strong></li>
+<li>Si tiene menos de 1000 puntos será <strong>NORMAL</strong></li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- 
+SELECT nombre, apellidos, ciudad, puntos, 'ORO' AS tipo_cliente 
+FROM consumidores
+WHERE puntos > 3000
+UNION
+SELECT nombre, apellidos, ciudad, puntos, 'PLATA' 
+FROM consumidores
+WHERE puntos BETWEEN 2000 AND 3000
+UNION
+SELECT nombre, apellidos, ciudad, puntos, 'BRONCE' 
+FROM consumidores
+WHERE puntos BETWEEN 1000 AND 2000
+UNION
+SELECT nombre, apellidos, ciudad, puntos, 'NORMAL' 
+FROM consumidores
+WHERE puntos < 1000;
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">Funciones de Agregación</h3>
+<h4 class="font-lg">MAX( ) MIN( )</h4>
+<h4 class="font-lg">SUM( ) AVG( )</h4>
+<h4 class="font-lg">COUNT ( )</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- AGREGATE FUNCTIONS -- MAX () -->
+<h3 class="font-xl">Funciones de Agregación</h3>
+<h4 class="font-lg">FUNCIÓN <span class="emoticono">👉</span> <span class="rosa">MAX( )</span></h4>
+<p>De todas los registros de una tabla, te devuelve el más <strong>GRANDE</strong>.</p>
+<pre><code class="language-sql">-- Valor más alto de la tabla de `facturas`.
+
+SELECT MAX(factura_total) AS factura_mas_alta
+FROM facturas;
+
+/*
++------------------+
+| factura_mas_alta |
++------------------+
+|           189.12 |
++------------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- AGREGATE FUNCTIONS -- MIN () -->
+<h3 class="font-xl">Funciones de Agregación</h3>
+<h4 class="font-lg">FUNCIÓN <span class="emoticono">👉</span> <span class="rosa">MIN( )</span></h4>
+<p>De todas los registros de una tabla, te devuelve el más <strong>PEQUEÑO</strong>.</p>
+<pre><code class="language-sql">-- Valor más bajo de la tabla de `facturas`.
+
+SELECT MIN(factura_total) AS factura_mas_baja
+FROM facturas;
+
+/*
++------------------+
+| factura_mas_baja |
++------------------+
+|           101.79 |
++------------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- AGREGATE FUNCTIONS -- SUM () -->
+<h3 class="font-xl">Funciones de Agregación</h3>
+<h4 class="font-lg">FUNCIÓN <span class="emoticono">👉</span> <span class="rosa">SUM( )</span></h4>
+<p>Suma todos los registros de esa columna.</p>
+<pre><code class="language-sql">-- Valor total de todas las `facturas`.
+
+SELECT SUM(factura_total) AS facturacion_total
+FROM facturas;
+
+/*
++-------------------+
+| facturacion_total |
++-------------------+
+|           2590.60 |
++-------------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- AGREGATE FUNCTIONS -- AVG () -->
+<h3 class="font-xl">Funciones de Agregación</h3>
+<h4 class="font-lg">FUNCIÓN <span class="emoticono">👉</span> <span class="rosa">AVG( )</span></h4>
+<p>Calcula la media de todos los valores de la columna.</p>
+<pre><code class="language-sql">-- Valor medio de todas las `facturas`.
+
+SELECT AVG(factura_total) AS facturacion_media
+FROM facturas;
+
+/*
++-------------------+
+| facturacion_media |
++-------------------+
+|        152.388235 |
++-------------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- AGREGATE FUNCTIONS -- COUNT () -->
+<h3 class="font-xl">Funciones de Agregación</h3>
+<h4 class="font-lg">FUNCIÓN <span class="emoticono">👉</span> <span class="rosa">COUNT( )</span></h4>
+<p>Cuenta el número de registros de una columna.</p>
+<pre><code class="language-sql">-- Cuantas facturas hay..
+
+SELECT count(factura_total) AS numero_de_facturas
+FROM facturas;
+
+/*
++--------------------+
+| numero_de_facturas |
++--------------------+
+|                 17 |
++--------------------+*/
+</code></pre>
+<p class="font-sm">¡Ojo! porque solo contará los registros que tengan valor, no los que tengan <strong>null</strong>. Así que para contar todos los registros habrá que usar <span class="rosa"><strong>COUNT(*)</strong></span></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- AGREGATE FUNCTIONS -- RESUMEN -->
+<h3 class="font-xl">Funciones de Agregación</h3>
+<h4 class="font-lg"><span class="rosa">RESUMEN</span></h4>
+<pre><code class="language-sql">SELECT 
+    MAX(factura_total)   AS mas_alta,
+    MIN(factura_total)   AS mas_baja,
+    SUM(factura_total)   AS facturacion_total,
+    AVG(factura_total)   AS factura_media,
+    count(factura_total) AS numero_de_facturas
+FROM facturas;
+
+/*
++----------+----------+-------------------+---------------+--------------------+
+| mas_alta | mas_baja | facturacion_total | factura_media | numero_de_facturas |
++----------+----------+-------------------+---------------+--------------------+
+|   189.12 |   101.79 |           2590.60 |    152.388235 |                 17 |
++----------+----------+-------------------+---------------+--------------------+*/
+
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">Agrupar agregaciones</h3>
+<h4 class="font-lg">GROUP BY</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Agrupar agregaciones -- GROUP BY -->
+<h3 class="font-xl">Agrupar agregaciones</h3>
+<h4 class="font-lg">CLÁUSULA <span class="emoticono">👉</span> <span class="rosa">GROUP BY</span></h4>
+<p>Cuando usamos <code>funciones de agregación</code> podemos decirle a SQL que esa agregación la haga por cada uno de los valores de una columna. Por ejemplo: Hazme la suma total de las facturas DE CADA USUARIO.</p>
+<pre><code class="language-sql">-- Cuanto ha gastado cada cliente.
+
+SELECT cliente_id, SUM(factura_total) AS total_cliente
+FROM facturas
+GROUP BY cliente_id;
+
+/*
++------------+---------------+
+| cliente_id | total_cliente |
++------------+---------------+
+|          1 |        802.89 |
+|          2 |        101.79 |
+|          3 |        705.90 |
+|          5 |        980.02 |
++------------+---------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">Agrupar agregaciones</h3>
+<h4 class="font-lg">GROUP BY</h4>
+<h4 class="font-lg">HAVING</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Agrupar agregaciones -- GROUP BY -->
+<h3 class="font-xl">Agrupar agregaciones</h3>
+<h4 class="font-lg">CLÁUSULA <span class="emoticono">👉</span> <span class="rosa">HAVING</span></h4>
+<p>Una vez hemos agrupado algo usando <span class="lila"><strong>GROUP BY</strong></span>, podemos filtrar los resultados que da esa agrupación, <strong>pero no podemos usar el <span class="lila">WHERE</span></strong>, necesitamos usar el <span class="lila u"><strong>HAVING</strong></span></p>
+<pre><code class="language-sql">-- Cuanto ha gastado cada cliente, y solo muestra los que han gastado más de 300.
+
+SELECT cliente_id, SUM(factura_total) AS total_cliente
+FROM facturas
+GROUP BY cliente_id
+HAVING total_cliente &gt; 300;
+
+/*
++------------+---------------+
+| cliente_id | total_cliente |
++------------+---------------+
+|          1 |        802.89 |
+|          3 |        705.90 |
+|          5 |        980.02 |
++------------+---------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Agrupar agregaciones -- GROUP BY -->
+<h3 class="font-xl">OJO CON EL ORDEN OTRA VEZ</h3>
+<p>A riesgo de parecer cansino, me gustaría repetir que mucho cuidado con el orden de las cláusulas.</p>
+<pre><code class="language-sql">
+SELECT 
+    factura_id, 
+    factura_total, 
+    pago_total, 
+    factura_fecha, 
+    nombre,
+    ciudad,
+    SUM(factura_total) AS total_por_cliente
+FROM facturas
+JOIN clientes USING (cliente_id)
+WHERE factura_fecha BETWEEN '2019-01-01' AND '2019-05-31'
+GROUP BY nombre
+HAVING pago_total &gt; 0
+ORDER BY pago_total
+LIMIT 1;
+
+/*
++------------+---------------+------------+---------------+--------+---------+-------------------+
+| factura_id | factura_total | pago_total | factura_fecha | nombre | ciudad  | total_por_cliente |
++------------+---------------+------------+---------------+--------+---------+-------------------+
+|         18 |        180.17 |      42.77 | 2019-05-23    | Susana | Llança  |            180.17 |
++------------+---------------+------------+---------------+--------+---------+-------------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- AGRUPACIONES - EJERCICIO 01 -->
+<h3 class="font-xl">AGRUPACIONES</h3>
+<p class="left"><span class="rosa"><strong>EJERCICIO 01</strong></p>
+<div class="left ">
+<ul>
+<li>Coge la tabla de <code>consumidores</code> de la BBDD <code>tienda</code>:
+<ul>
+<li>Genera un listado de las puntuaciones más altas <strong>POR COMUNIDAD AUTÓNOMA</strong>.</li>
+<li>Ordena el resultado por puntos <span class="u">de mayor a menor</span>.</li>
+<li>Muestra solo los resultados que tengan <span class="u">más de 1000 puntos</span>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- 
+SELECT comunidad_autonoma, MAX(puntos) AS puntos_maximos
+FROM consumidores
+GROUP BY comunidad_autonoma
+HAVING puntos_maximos > 1000
+ORDER BY puntos_maximos DESC;
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">SUBCONSULTAS</h3>
+<h4 class="font-lg">Buscar algo utilizando más de un SELECT</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- SUBCONSULTAS -->
+<h3 class="font-xl">SUBCONSULTAS</h3>
+<p class="font-sm">A veces tenemos que hacer consultas que son más complejas y necesitamos utilizar la cláusula <span class="rosa"><strong>SELECT</strong></span> más veces. Veamos un ejemplo.</p>
+<p class="font-sm">Ej: Busca todos los cursos que sean más caros <strong>que el curso de CSS</strong> {.font-sm}
+DIVIDE EL PROBLEMA EN VARIOS PROBLEMILLAS</p>
+<ol>
+<li class="lila font-sm">¿Cuánto vale el curso de CSS?</li>
+</ol>
+<pre><code class="language-sql">-- Cuanto vale el curso de CSS.
+
+SELECT precio
+FROM cursos
+WHERE curso_id = 2;
+
+/*
++--------+
+| precio |
++--------+
+|  50.00 |
++--------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- SUBCONSULTAS -->
+<h3 class="font-xl">SUBCONSULTAS</h3>
+<p class="font-sm">Ej: Busca todos los cursos que sean más caros <strong>que el curso de CSS</strong> {.font-sm}
+DIVIDE EL PROBLEMA EN VARIOS PROBLEMILLAS</p>
+<ol start="2">
+<li class="lila font-sm">¿Cómo obtengo todos los cursos más caros de 50?</li>
+</ol>
+<pre><code class="language-sql">-- Cursos más caros de 50.
+
+SELECT curso_id, nombre, precio
+FROM cursos
+WHERE precio &gt; 50;
+
+/*
++----------+---------+--------+
+| curso_id | nombre  | precio |
++----------+---------+--------+
+|        4 | JS      | 200.00 |
+|        5 | Node.js | 250.00 |
++----------+---------+--------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- SUBCONSULTAS -->
+<h3 class="font-xl">SUBCONSULTAS</h3>
+<p class="font-sm">Ej: Busca todos los cursos que sean más caros <strong>que el curso de CSS</strong> {.font-sm}
+DIVIDE EL PROBLEMA EN VARIOS PROBLEMILLAS</p>
+<ol start="3">
+<li class="lila font-sm">Mezcla los dos resultados poniendo todo el <span class="rosa"><strong>SELECT</strong></span> en el lugar del <code>50</code></li>
+</ol>
+<pre><code class="language-sql">-- Cursos más caros de 50.
+
+SELECT curso_id, nombre, precio
+FROM cursos
+WHERE precio &gt; (
+    SELECT precio
+    FROM cursos
+    WHERE curso_id = 2
+);
+
+/*
++----------+---------+--------+
+| curso_id | nombre  | precio |
++----------+---------+--------+
+|        4 | JS      | 200.00 |
+|        5 | Node.js | 250.00 |
++----------+---------+--------+*/
+</code></pre>
+<p>🛀 <strong>¡EUREKA!</strong></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- SUBCONSULTAS - EJERCICIO 01 -->
+<h3 class="font-xl">SUBCONSULTAS</h3>
+<p class="left"><span class="rosa"><strong>EJERCICIO 01</strong></p>
+<div class="left ">
+<ul>
+<li>Coge la tabla de <code>matriculas</code> de la BBDD <code>escuela</code>:
+<ul>
+<li>Y muestra los alumnos que NO SE HAN MATRICULADO A NADA</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- 
+SELECT *
+FROM alumnos
+WHERE alumno_id NOT IN (
+	SELECT DISTINCT alumno_id 
+	FROM matriculas
+);
+ -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">Son Gratis</h4>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<p class="font-md">SQLite viene con un montón de funciones que puedes utilizar para solucionarte la vida. Veamos unas cuantas.</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1>Funciones para Números</h1>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - ROUND -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">Números <span class="emoticono">👉</span> <span class="rosa">ROUND( )</span></h4>
+<ul>
+<li>Redondea un número de forma natural.</li>
+<li>Permite 2 parámetros, el número que quieres redondear, y cuantos decimales quieres.</li>
+</ul>
+<pre><code class="language-sql">-- Redondeos del número 5.7654.
+
+SELECT ROUND(5.7654), ROUND(5.7654, 1), ROUND(5.7654, 2), ROUND(5.7654, 3);
+
+/*
++---------------+------------------+------------------+------------------+
+| ROUND(5.7654) | ROUND(5.7654, 1) | ROUND(5.7654, 2) | ROUND(5.7654, 3) |
++---------------+------------------+------------------+------------------+
+|             6 |              5.8 |             5.77 |            5.765 |
++---------------+------------------+------------------+------------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - CEILING -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">Números <span class="emoticono">👉</span> <span class="rosa">CEILING( )</span></h4>
+<ul>
+<li>Redondea al alza SIEMPRE.</li>
+</ul>
+<pre><code class="language-sql">-- Redondeo al alza.
+
+SELECT CEILING(5.1), CEILING(5.9);
+
+/*
++--------------+--------------+
+| CEILING(5.1) | CEILING(5.9) |
++--------------+--------------+
+|            6 |            6 |
++--------------+--------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - FLOOR -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">Números <span class="emoticono">👉</span> <span class="rosa">FLOOR( )</span></h4>
+<ul>
+<li>Redondea a la baja SIEMPRE.</li>
+</ul>
+<pre><code class="language-sql">-- Redondeo a la baja.
+
+SELECT FLOOR(5.1), FLOOR(5.9);
+
+/*
++------------+------------+
+| FLOOR(5.1) | FLOOR(5.9) |
++------------+------------+
+|          5 |          5 |
++------------+------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - ABS -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">Números <span class="emoticono">👉</span> <span class="rosa">ABS( )</span></h4>
+<ul>
+<li>Sirve para obtener el valor absoluto de un número. Es decir, sin el signo.</li>
+</ul>
+<pre><code class="language-sql">-- Números sin signo.
+
+SELECT ABS(-23), ABS(23);
+
+/*
++----------+---------+
+| ABS(-23) | ABS(23) |
++----------+---------+
+|       23 |      23 |
++----------+---------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - RANDOM -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">Números <span class="emoticono">👉</span> <span class="rosa">RANDOM( )</span></h4>
+<ul>
+<li>Devuelve un número aleatorio entre -9223372036854775808 y +9223372036854775807.</li>
+</ul>
+<pre><code class="language-sql">-- Números aleatorios.
+
+SELECT RANDOM(), RANDOM(), RANDOM();
+
+/*  +--------------------+---------------------+-------------------+
+    | RANDOM()           | RANDOM()            | RANDOM()          |
+    +--------------------+---------------------+-------------------+
+    | 502213239076796700 | -35725780108435660  | 11593995696926917 |
+    +--------------------+---------------------+-------------------+  */
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1>Funciones para STRINGS</h1>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - LENGTH -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">SRINGS <span class="emoticono">👉</span> <span class="rosa">LENGTH( )</span></h4>
+<ul>
+<li>Devuelve la longitud del valor.</li>
+</ul>
+<pre><code class="language-sql">-- Longitudes.
+
+SELECT LENGTH('hola'), LENGTH('zapato'), LENGTH(2);
+
+/*
++----------------+------------------+-------------+
+| LENGTH('hola') | LENGTH('zapato') | LENGTH(2)   |
++----------------+------------------+-------------+
+|              4 |                6 |           1 |
++----------------+------------------+-------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - UPPER -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">SRINGS <span class="emoticono">👉</span> <span class="rosa">UPPER( )</span></h4>
+<ul>
+<li>Transforma a mayúsculas.</li>
+</ul>
+<pre><code class="language-sql">-- Todo en mayúsculas. 🥳
+
+SELECT UPPER('Hola'), UPPER('Zapato'), UPPER(2);
+
+/*
++---------------+-----------------+----------+
+| UPPER('Hola') | UPPER('Zapato') | UPPER(2) |
++---------------+-----------------+----------+
+| HOLA          | ZAPATO          | 2        |
++---------------+-----------------+----------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - LOWER -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">SRINGS <span class="emoticono">👉</span> <span class="rosa">LOWER( )</span></h4>
+<ul>
+<li>Transforma a minúsculas.</li>
+</ul>
+<pre><code class="language-sql">-- Todo en minúsculas. 🤪
+
+SELECT LOWER('Hola'), LOWER('ZAPATO'), LOWER(2);
+
+/*
++---------------+-----------------+----------+
+| LOWER('hola') | LOWER('zapato') | LOWER(2) |
++---------------+-----------------+----------+
+| hola          | zapato          | 2        |
++---------------+-----------------+----------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - TRIM -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">SRINGS <span class="emoticono">👉</span> <span class="rosa">TRIM( )</span></h4>
+<ul>
+<li><strong>LTRIM</strong> recorta los espacios al principio.</li>
+<li><strong>RTRIM</strong> recorta los espacios al final.</li>
+<li><strong>TRIM</strong> recorta los espacios en blancos al principio y al final.</li>
+</ul>
+<pre><code class="language-sql">-- A recortar espacios. ✂
+
+SELECT LTRIM('   hola   '), RTRIM('   hola   '), TRIM('   hola   ');
+
+/*
++---------------------+---------------------+--------------------+
+| LTRIM('   hola   ') | RTRIM('   hola   ') | TRIM('   hola   ') |
++---------------------+---------------------+--------------------+
+| 'hola   '           | '   hola'           | 'hola'             |
++---------------------+---------------------+--------------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - CONCAT -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">SRINGS <span class="emoticono">👉</span> <span class="rosa">CONCAT( )</span></h4>
+<ul>
+<li>Sirve para concatenar los valores que pongamos dentro del <strong>CONCAT</strong> separados por coma.</li>
+</ul>
+<pre><code class="language-sql">-- Concatenando voy...
+
+SELECT CONCAT('hola', ' ', 'amig@');
+
+/*
++------------------------------+
+| CONCAT('hola', ' ', 'amig@') |
++------------------------------+
+| hola amig@                   |
++------------------------------+*/
+</code></pre>
+<p>Con este podríamos hacer cosas tipo tener un nombre completo o dirección completa mezclando varias columnas.</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1>Funciones para FECHAS</h1>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - NOW() -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">SRINGS</h4>
+<h4 class="font-md"><span class="rosa">DATETIME(‘now’), DATE(‘now’), TIME(‘now’)</span></h4>
+<ul>
+<li>Generan fechas automaticamente para AHORA MISMO:
+<ul>
+<li><strong>DATETIME(‘now’)</strong> devuelve la fecha y hora actual.</li>
+<li><strong>DATE(‘now’)</strong> devuelve la fecha actual.</li>
+<li><strong>TIME(‘now’)</strong> devuelve la hora actual.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-sql">-- Tic tac......
+
+SELECT DATETIME('now'), DATE('now'), TIME('now');
+
+/*
++---------------------+------------+-------------+
+| DATETIME('now')     | DATE('now')| TIME('now') |
++---------------------+------------+-------------+
+| 2023-08-01 18:24:48 | 2023-08-01 | 18:24:48    |
++---------------------+------------+-------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - STRFTIME() -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">SRINGS</h4>
+<h4 class="font-md"><span class="rosa">STRFTIME( )</span></h4>
+<ul>
+<li>Extrae el año, mes o día de una fecha.</li>
+</ul>
+<pre><code class="language-sql">-- Tic tac......
+
+SELECT 
+  STRFTIME('%Y', '2023-12-30'), -- 2023
+  STRFTIME('%m','now'),         -- 08
+  STRFTIME('%d', 'now'),        -- 01
+  STRFTIME('%w', 'now');        -- 2 (Lunes = 0, Martes = 1, Miércoles = 2...)
+
+
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - EJEMPLO YEAR() -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">SRINGS</h4>
+<h4 class="font-md"><span class="rosa">Ejemplo con YEAR( )</span></h4>
+<p>Si quisieras obtener todos los pedidos del año anterior y que siempre sea el anterior al actual, podríamos hacer lo siguiente.</p>
+<pre><code class="language-sql">-- Obtener los pedidos del año anterior.
+SELECT * 
+FROM matriculas 
+WHERE STRFTIME('%Y', date) = STRFTIME('%Y' , 'now') - 1;
+
+/*
++--------------+---------------------+---------------+-----------+----------+
+| matricula_id | fecha               | precio_pagado | alumno_id | curso_id |
++--------------+---------------------+---------------+-----------+----------+
+|            5 | 2024-09-15 00:00:00 |        200.00 |         5 |        5 |
++--------------+---------------------+---------------+-----------+----------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <!-- Funciones de SQLite - DATE_ADD -->
+<h3 class="font-xl">Funciones de SQLite</h3>
+<h4 class="font-lg">FECHAS <span class="emoticono">👉</span> <span class="rosa">DATE(‘fecha’ , ‘intervalo’  )</span></h4>
+<ul>
+<li>Sirve para añadir o quitar tiempo a una fecha.</li>
+</ul>
+<pre><code class="language-sql">-- Cambiando calendarios. 📆
+
+SELECT DATE('2015-05-12', '+1 day'), DATE('2015-05-12', '+2 year');
+
+/*
++---------------------------------+-------------------------------+
+| DATE('2015-05-12', '+1 day')    | DATE('2015-05-12', '+2 year') |
++---------------------------------+-------------------------------+
+| 2015-05-13                      | 2017-05-12                    |
++---------------------------------+-------------------------------+*/
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1 class="invisible" aria-hidden="true">THE END</h1>
+<p class="font-xxxl">🔚</p>
+
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  <div class="line top"></div>
+  <div class="line bottom"></div>
+  <div class="line left"></div>
+  <div class="line right"></div>
+
+  <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+<script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+
+
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+  
+
+<script>
+  const printPlugins = [
+      RevealNotes,
+      RevealHighlight,
+      RevealMath.MathJax3,
+      RevealAnimate,
+      
+			RevealEmbedTweet,
+			RevealChart,
+		];
+
+		const plugins =  [...printPlugins,
+		RevealZoom, 
+		RevealSearch, 
+				RevealMarkdown, 
+				RevealMenu, 
+				RevealFullscreen,
+				RevealAnything,
+				//RevealAudioSlideshow,
+				//RevealAudioRecorder,
+				RevealCustomControls, 
+				// poll
+				// question
+				// seminar
+				Verticator 
+				 ]
+
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+      controlsTutorial: true,
+      controlsLayout: 'bottom-right',
+      controlsBackArrows: 'faded',
+      progress: true,
+      slideNumber: false,
+      //#showSlideNumber "all" "print" "speaker"
+      hash: true, //# hash: false,
+      //# respondToHashChanges: true,
+      //# history: false,
+      keyboard: true,
+      //#keyboardCondition: null,
+      overview: true,
+      center: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      //#navigationMode: 'default', linear grid
+      shuffle: false,
+      fragments: true,
+      fragmentInURL: false,
+      embedded: false,
+      help: true,
+      //#pause: true
+      showNotes: false,
+      autoPlayMedia: false, // TODO fix this to a nullable value
+      //#preloadIframes: null. true false
+      //#autoAnimate: true
+      //#autoAnimateMatcher: null,
+      //#autoAnimateEasing: 'ease',
+      //autoAnimateDuration: 1.0,
+      //#autoAnimateUnmatched: true
+      //#autoAnimateStyles: []
+      autoSlide: 0, // TODO fix this to a falseable value
+      autoSlideStoppable: true,
+      autoSlideMethod: '0',
+      defaultTiming: 120,
+      mouseWheel: false,
+      //#previewLinks: false
+      //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+      //#postMessageEvents: false,
+      //#focusBodyOnPageVisibilityChange: true,
+      transition: 'slide',
+      transitionSpeed: 'fast',
+      backgroundTransition: 'fade',
+      //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+      //#pdfSeparateFragments: true,
+      //#pdfPageHeightOffset: -1,
+      viewDistance: 3,
+      //#mobileViewDistance: 2,
+      display: 'block',
+      //#hideInactiveCursor: true,
+      //#hideCursorTime: 5000
+
+      // Parallax Background
+      parallaxBackgroundImage: '',
+      parallaxBackgroundSize: '',
+      parallaxBackgroundHorizontal: 0,
+      parallaxBackgroundVertical: 0,
+
+      //Presentation Size
+      width: 960,
+			height: 700,
+			margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2,
+      disableLayout: false,
+
+      audio: {
+        prefix: 'audio/', // audio files are stored in the "audio" folder
+        suffix: '.ogg', // audio files have the ".ogg" ending
+        textToSpeechURL: null, // the URL to the text to speech converter
+        defaultNotes: false, // use slide notes as default for the text to speech converter
+        defaultText: false, // use slide text as default for the text to speech converter
+        advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+        autoplay: false, // automatically start slideshow
+        defaultDuration: 5, // default duration in seconds if no audio is available
+        defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+        playerOpacity: 0.05, // opacity value of audio player if unfocused
+        playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+        startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+      },
+      
+			customcontrols: {
+					controls: [
+      						{
+						  id: 'toggle-overview',
+						  title: 'Toggle overview (O)',
+						  icon: '<i class="fa fa-th"></i>',
+						  action: 'Reveal.toggleOverview();'
+						}
+						
+				]
+			},
+			chart: {
+					defaults: { 
+						color: 'lightgray', // color of labels
+						scale: { 
+							beginAtZero: true, 
+							ticks: { stepSize: 1 },
+							grid: { color: "lightgray" } , // color of grid lines
+						},
+					},
+					line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ] }, 
+					bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+					pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+					radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			},
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				anything: [ 
+				{
+		className: "plot",
+		defaults: {width:500, height: 500, grid:true},
+		initialize: (function(container, options){ options.target = "#"+container.id; functionPlot(options) })
+	 },
+	 {
+		className: "chart",  
+		initialize: (function(container, options){ container.chart = new Chart(container.getContext("2d"), options);  })
+	 },
+	 {
+		className: "anything",
+		initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} })
+	 },
+					],
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: (window.location.search.match(/print-pdf/gi) ? printPlugins : plugins ) 
+		});
+			
+
+
+	    // Change chalkboard theme : 
+		function changeTheme(input) {
+			var config = {};
+			config.theme = input.value;
+			Reveal.getPlugin("RevealChalkboard").configure(config);
+			input.blur();
+		}
+
+		// // Handle the message inside the webview
+        // window.addEventListener('message', event => {
+
+        //     const message = event.data; // The JSON data our extension sent
+
+        //     switch (message.command) {
+        //         case 'refactor':
+        //             Reveal.toggleHelp();
+        //     }
+        // });
+
+		if (window.location.search.match(/print-pdf-now/gi)) {
+      		setTimeout(() => {
+				window.print();
+			  }, 2500);
+			
+    }
+</script>
+
+</body>
+
+</html>

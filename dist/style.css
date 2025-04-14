@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;800&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/victormono@latest/dist/index.min.css');
+
+
+* {
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+h1 {
+    padding-top: 3rem;
+}
+
+.menu {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;    
+    gap: 2rem;
+    width: 70vw;
+    margin: 2rem auto;
+}
+
+.menu__link {
+    text-decoration: none;
+    color: var(--rosa);
+    padding: 3rem 1.5rem;
+    outline: 5px solid #232323;
+    outline-offset: 5px; 
+    font-size: 1.8rem;
+    font-weight: 600;
+    transition: background-color .5s ease, color .5s ease;
+}
+
+.menu__link:hover {
+    background-color: var(--amarillo);
+    color: var(--lila);
+}
